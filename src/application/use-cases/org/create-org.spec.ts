@@ -1,0 +1,47 @@
+import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
+import { OrgRepository } from "@/domain/org/repositories/org-repository";
+import { orgInMemoryDb } from "@/infra/repositories/in-memory/org-in-memory-db";
+import { IdGenerator } from "@/application/ports/id-generator";
+import { randomUUID } from "node:crypto";
+import { CreateOrg } from "./create-org";
+import { EmailAlreadyExistError } from "@/application/error/email-already-exist-error";
+describe("create org user case", () => {
+    let sut: CreateOrg;
+    let orgs: OrgRepository;
+    let idGenerator: IdGenerator;
+    beforeEach(() => {
+        orgs = new orgInMemoryDb();
+        idGenerator = {
+            next: vi.fn(() => randomUUID()),
+        };
+        sut = new CreateOrg({
+            repositories: { orgs },
+            services: { idGenerator },
+        });
+    });
+
+    it("should create a new org", async () => {
+        const input = {
+            name: "joe doe",
+            email: "joe@doe.com",
+            phone: "123456789",
+            description: "any_description",
+        };
+        const response = await sut.execute(input);
+        expect(response.id).toEqual(expect.any(String));
+    });
+
+    it("should throw EmailAlreadyExistError if email already exist", async () => {
+        const user = {
+            name: "joe doe",
+            email: "joe@doe.com",
+            phone: "123456789",
+            description: "any_description",
+        };
+
+        await sut.execute(user);
+        await expect(sut.execute(user)).rejects.toBeInstanceOf(
+            EmailAlreadyExistError,
+        );
+    });
+});

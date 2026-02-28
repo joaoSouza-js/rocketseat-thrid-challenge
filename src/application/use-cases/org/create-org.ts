@@ -27,10 +27,11 @@ export class CreateOrg {
     }
 
     async  execute(input: CreateOrgCommand):Promise<CreateOrgResponse> {
-        const org = this.orgs.findByEmail(input.email)
+        const org = await this.orgs.findByEmail(input.email)
 
-        if(org !== null){
-            new EmailAlreadyExistError(input.email)
+      
+        if(org != null){
+           throw new EmailAlreadyExistError(input.email)
         }
 
         const newOrg =  Org.create({
