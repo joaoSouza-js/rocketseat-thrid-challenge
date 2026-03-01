@@ -3,17 +3,25 @@ interface LocationProps {
   city: string
 }
 
-export class Location {
+export class LocationValueObject {
   private constructor(private props: LocationProps) {}
 
-  static create(props: LocationProps): Location {
-    const state = props.state.trim().toUpperCase()
-    const city = props.city.trim().toLowerCase()
+  private static normalize(value: string): string {
+    return value
+      .trim()
+      .normalize("NFD")                 // separate accent from letter
+      .replace(/[\u0300-\u036f]/g, "")  // remove diacritics
+      .toUpperCase()
+  }
+
+  static create(props: LocationProps): LocationValueObject {
+    const state = this.normalize(props.state)
+    const city = this.normalize(props.city)
 
     if (!state) throw new Error("State is required")
     if (!city) throw new Error("City is required")
 
-    return new Location({ state, city })
+    return new LocationValueObject({ state, city })
   }
 
   get state() {
@@ -24,7 +32,7 @@ export class Location {
     return this.props.city
   }
 
-  equals(other: Location): boolean {
+  equals(other: LocationValueObject): boolean {
     return (
       this.props.state === other.state &&
       this.props.city === other.city

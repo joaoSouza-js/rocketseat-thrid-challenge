@@ -1,4 +1,4 @@
-import { Location } from "../value-object/location"
+import { LocationValueObject } from "../value-object/location"
 import { PetDependenceValueObject, PetDependency } from "../value-object/pet-dependence"
 import { PetEnergy } from "../value-object/pet-energy"
 import { PetSize, PetSizeValueObject } from "../value-object/pet-size"
@@ -7,7 +7,7 @@ interface PetProps {
   id: string
   name: string
   orgId: string
-  location: Location
+  location: LocationValueObject
   createdAt: Date
   size: PetSizeValueObject
   dependence: PetDependenceValueObject,
@@ -41,7 +41,7 @@ export class Pet {
       id: input.id,
       name: input.name.trim(),
       orgId: input.orgId,
-      location: Location.create({
+      location: LocationValueObject.create({
         state: input.state,
         city: input.city,
       }),
@@ -65,7 +65,7 @@ export class Pet {
   }
 
   changeLocation(state: string, city: string) {
-    this.props.location = Location.create({ state, city })
+    this.props.location = LocationValueObject.create({ state, city })
   }
 
   // getters

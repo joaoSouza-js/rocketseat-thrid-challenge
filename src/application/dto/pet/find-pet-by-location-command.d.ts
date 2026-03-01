@@ -7,7 +7,7 @@ export interface FindPetByLocationCommand {
 
     query?: {
         page?: number;
-        limit: number;
+        limit?: number;
         size?: string;
         energy?: string;
         dependence?: string;

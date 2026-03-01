@@ -4,6 +4,7 @@ import {
 } from "@/application/dto/pet/find-pet-by-location-command";
 import { PetResponseMapper } from "@/application/mappers/pet-response-mapper";
 import { PetRepository } from "@/domain/pet/repositories/pet-repository";
+import { LocationValueObject } from "@/domain/pet/value-object/location";
 import {
     PetDependenceValueObject,
     PetDependency,
@@ -40,11 +41,14 @@ export class FindPetByLocationUseCase {
             ? PetEnergyValueObject.create(input.query.energy)
             : undefined;
 
+        const Location = LocationValueObject.create({
+            state: input.state,
+            city: input.city,
+        });
+
+   
         const pets = await this.pets.findByLocation({
-            location: {
-                city: input.city,
-                state: input.state
-            }, 
+            location: Location,
             query: {
                 dependence: petDependence,
                 energy: petEnergy,

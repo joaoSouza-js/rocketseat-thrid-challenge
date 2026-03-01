@@ -1,30 +1,40 @@
 import { Pet } from "@/domain/pet/entities/pet";
 import {
-    FindByLocation,
     PetAvailableQuery,
     PetRepository,
 } from "@/domain/pet/repositories/pet-repository";
+import { LocationValueObject } from "@/domain/pet/value-object/location";
 
 export class InMemoryPetRepository implements PetRepository {
     findByLocation(props: {
-        location: FindByLocation;
+        location: LocationValueObject;
         query?: PetAvailableQuery;
     }): Promise<Pet[]> {
         const { location, query } = props;
-        const limit = query?.limit ?? 10
-        const page = query?.page ?? 1
-      
-        const pets = this.pets.filter((pet) => {
-            console.log(pet.city)
-            const isCorrectLocation =
-                pet.state === location.state && pet.city === location.city
+        const limit = query?.limit ?? 10;
+        const page = query?.page ?? 1;
 
-            return isCorrectLocation
+        const pets = this.pets.filter((pet) => {
+            const isCorrectLocation =
+                pet.state === location.state && pet.city === location.city;
+
+            const isCorrectParams =
+                this.matchesOptionalFilter(
+                    query?.dependence?.value,
+                    pet.dependence,
+                ) &&
+                this.matchesOptionalFilter(query?.energy?.value, pet.energy) &&
+                this.matchesOptionalFilter(query?.size?.value, pet.size);
+
+            return isCorrectLocation && isCorrectParams;
         });
 
-       
+        const start = (page - 1) * limit;
+        const end = start + limit;
 
-        return Promise.resolve(pets);
+        const petsPagination = pets.slice(start, end);
+
+        return Promise.resolve(petsPagination);
     }
     private pets: Pet[] = [];
     findById(id: string): Promise<Pet | null> {
@@ -36,7 +46,9 @@ export class InMemoryPetRepository implements PetRepository {
         filterValue: string | undefined | null,
         actualValue: string,
     ): boolean {
-        return filterValue == null || filterValue === actualValue;
+        const match = filterValue == null || filterValue === actualValue;
+
+        return match;
     }
 
     delete(id: string): Promise<void> {
