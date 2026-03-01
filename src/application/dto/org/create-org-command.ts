@@ -6,5 +6,7 @@ export interface CreateOrgCommand {
 }
 
 export interface CreateOrgResponse {
-    id: string
+    org: {
+        id: string
+    }
 }

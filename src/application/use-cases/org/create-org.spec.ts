@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
 import { OrgRepository } from "@/domain/org/repositories/org-repository";
-import { orgInMemoryDb } from "@/infra/repositories/in-memory/org-in-memory-db";
+import { InMemoryOrgRepository } from "@/infra/repositories/in-memory/org-in-memory-repository";
 import { IdGenerator } from "@/application/ports/id-generator";
 import { randomUUID } from "node:crypto";
 import { CreateOrg } from "./create-org";
@@ -10,7 +10,7 @@ describe("create org user case", () => {
     let orgs: OrgRepository;
     let idGenerator: IdGenerator;
     beforeEach(() => {
-        orgs = new orgInMemoryDb();
+        orgs = new InMemoryOrgRepository();
         idGenerator = {
             next: vi.fn(() => randomUUID()),
         };
@@ -21,14 +21,15 @@ describe("create org user case", () => {
     });
 
     it("should create a new org", async () => {
-        const input = {
+        const org = {
             name: "joe doe",
             email: "joe@doe.com",
             phone: "123456789",
             description: "any_description",
         };
-        const response = await sut.execute(input);
-        expect(response.id).toEqual(expect.any(String));
+        const response = await sut.execute(org);
+        expect(response.org.id).toEqual(expect.any(String));
+        expect(await orgs.findByEmail("joe@doe.com")).not.toBeNull();
     });
 
     it("should throw EmailAlreadyExistError if email already exist", async () => {

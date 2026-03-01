@@ -1,4 +1,5 @@
 import { Location } from "../value-object/location"
+import { PetSize, PetSizeValueObject } from "../value-object/pet-size"
 
 interface PetProps {
   id: string
@@ -6,6 +7,7 @@ interface PetProps {
   orgId: string
   location: Location
   createdAt: Date
+  size: PetSizeValueObject
 }
 
 interface CreatePetProps {
@@ -14,6 +16,7 @@ interface CreatePetProps {
   orgId: string
   state: string
   city: string
+  size: PetSize
 }
 
 export class Pet {
@@ -24,9 +27,7 @@ export class Pet {
       throw new Error("Pet name is required")
     }
 
-    if (!input.orgId) {
-      throw new Error("Pet must belong to an organization")
-    }
+    const petSize =  PetSizeValueObject.create(input.size)
 
     return new Pet({
       id: input.id,
@@ -37,6 +38,7 @@ export class Pet {
         city: input.city,
       }),
       createdAt: new Date(),
+      size: petSize
     })
   }
 

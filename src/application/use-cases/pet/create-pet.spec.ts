@@ -1,0 +1,69 @@
+import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
+
+import { IdGenerator } from "@/application/ports/id-generator";
+import { CreatePet } from "./create-pet";
+import { InMemoryPetRepository } from "@/infra/repositories/in-memory/pet-in-memory-repository";
+import { InMemoryOrgRepository } from "@/infra/repositories/in-memory/org-in-memory-repository";
+import { Org } from "@/domain/org/entities/org";
+import { ResourceNotFoundError } from "@/application/error/resource-not-found-error";
+
+describe("CreatePet use case", () => {
+    let sut: CreatePet;
+    let orgs: InMemoryOrgRepository;
+    let pets: InMemoryPetRepository;
+    let idGenerator: IdGenerator;
+
+    beforeEach(() => {
+        orgs = new InMemoryOrgRepository();
+        pets = new InMemoryPetRepository();
+
+        idGenerator = {
+            next: vi.fn(() => "fixed-pet-id"),
+        };
+
+        sut = new CreatePet({
+            repositories: {
+                orgs: orgs,
+                pets: pets,
+            },
+            services: {
+                idGenerator,
+            },
+        });
+    });
+
+    it("should create a pet when org exists", async () => {
+        const org = Org.create({
+            id: "org-1",
+            name: "Org",
+            email: "org@mail.com",
+            phone: "123",
+            description: "desc",
+        })
+        await orgs.save(org);
+
+       
+        const response = await sut.execute({
+            orgId: "org-1",
+            name: "Thor",
+            size: "small",
+            city: "City",
+            state: "State",
+        });
+
+        expect(response.pet.id).toBe("fixed-pet-id");
+   
+    });
+
+    it("should throw ResourceNotFoundError if org does not exist", async () => {
+        await expect(() => sut.execute({
+            orgId: "org-1",
+            name: "Thor",
+            size: "small",
+            city: "City",
+            state: "State",
+        })).rejects.toBeInstanceOf(ResourceNotFoundError);
+    });
+
+ 
+});

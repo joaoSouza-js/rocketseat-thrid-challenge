@@ -1,7 +1,7 @@
 import { Org } from "../../../domain/org/entities/org"
 import { OrgRepository } from "../../../domain/org/repositories/org-repository"
 
-export class orgInMemoryDb implements OrgRepository {
+export class InMemoryOrgRepository implements OrgRepository {
     private orgs: Org[] = []
     findByEmail(email: string): Promise<Org | null> {
         const org = this.orgs.find(org => org.email.toString() === email)   ?? null
