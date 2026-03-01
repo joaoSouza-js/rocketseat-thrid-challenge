@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
-import { FindPetByLocationUseCase } from "./find-pet-by-location";
-import { PetRepository } from "@/domain/pet/repositories/pet-repository";
-import { InMemoryPetRepository } from "@/infra/repositories/in-memory/pet-in-memory-repository";
 import { Pet } from "@/domain/pet/entities/pet";
+import { PetRepository } from "@/domain/pet/repositories/pet-repository";
 import { PetDependency } from "@/domain/pet/value-object/pet-dependence";
 import { PetEnergy } from "@/domain/pet/value-object/pet-energy";
 import { PetSize } from "@/domain/pet/value-object/pet-size";
+import { InMemoryPetRepository } from "@/infra/repositories/in-memory/pet-in-memory-repository";
+import { beforeEach, describe, expect, it } from "vitest";
+import { FindPetByLocationUseCase } from "./find-pet-by-location";
 
 describe("find pet by location use case ", () => {
     let sut: FindPetByLocationUseCase;
@@ -215,7 +215,7 @@ describe("find pet by location use case ", () => {
     })
 
     it("should find pets with pagination", async () => {
-      
+
         const selectedState = "Rio";
         const selectedCity = "paraiba";
 
@@ -234,13 +234,13 @@ describe("find pet by location use case ", () => {
             return petsRepository.create(pet);
         });
 
-   
+
         await Promise.all(pets);
 
         const response = await sut.execute({
             state: selectedState,
             city: selectedCity,
-            query:{
+            query: {
                 limit: 4,
                 page: 2
             }

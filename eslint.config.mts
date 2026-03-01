@@ -9,5 +9,5 @@ export default defineConfig([
   tseslint.configs.recommended,
   { files: ["**/*.json"], plugins: { json }, language: "json/json", extends: ["json/recommended"] },
   { files: ["**/*.jsonc"], plugins: { json }, language: "json/jsonc", extends: ["json/recommended"] },
-  globalIgnores(["**/node_modules", "**/dist", "**/build", "package-lock.json"])
+  globalIgnores(["**/node_modules", "**/dist", "**/build", "package-lock.json","tsconfig.json"])
 ]);

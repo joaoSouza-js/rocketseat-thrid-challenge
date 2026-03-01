@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { OrgRepository } from "@/domain/org/repositories/org-repository";
 import { InMemoryOrgRepository } from "@/infra/repositories/in-memory/org-in-memory-repository";
 import { IdGenerator } from "@/application/ports/id-generator";

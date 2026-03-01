@@ -1,7 +1,6 @@
 import { LocationValueObject } from "../value-object/location"
-import { PetDependenceValueObject, PetDependency } from "../value-object/pet-dependence"
-import { PetEnergy } from "../value-object/pet-energy"
-import { PetSize, PetSizeValueObject } from "../value-object/pet-size"
+import { PetDependenceValueObject } from "../value-object/pet-dependence"
+import { PetSizeValueObject } from "../value-object/pet-size"
 
 interface PetProps {
   id: string
@@ -26,14 +25,14 @@ interface CreatePetProps {
 }
 
 export class Pet {
-  private constructor(private props: PetProps) {}
+  private constructor(private props: PetProps) { }
 
   static create(input: CreatePetProps): Pet {
     if (!input.name.trim()) {
       throw new Error("Pet name is required")
     }
 
-    const petSize =  PetSizeValueObject.create(input.size)
+    const petSize = PetSizeValueObject.create(input.size)
     const petDependence = PetDependenceValueObject.create(input.dependence)
     const petEnergy = PetDependenceValueObject.create(input.energy)
 
@@ -95,7 +94,7 @@ export class Pet {
   }
 
   get size() {
-    return this.props.size.value 
+    return this.props.size.value
   }
 
   get dependence() {

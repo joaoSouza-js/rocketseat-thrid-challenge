@@ -1,6 +1,3 @@
-import { PetDependency } from "@/domain/pet/value-object/pet-dependence"
-import { PetEnergy } from "@/domain/pet/value-object/pet-energy"
-import { PetSize } from "@/domain/pet/value-object/pet-size"
 
 export interface CreatePetCommand {
     name: string

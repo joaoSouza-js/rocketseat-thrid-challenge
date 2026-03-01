@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest"
 import { InvalidResourceSelectionError } from "@/domain/error/invalid-resource-selection-error"
+import { describe, expect, it } from "vitest"
 import { PetEnergyValueObject } from "./pet-energy"
 
 describe("PetEnergyValueObject", () => {
@@ -15,10 +15,10 @@ describe("PetEnergyValueObject", () => {
 
     it("should create valueObject with 'medium' energy", () => {
       const valueObject = PetEnergyValueObject.create("medium")
- 
+
       expect(valueObject.value).toBe("medium")
     })
-  
+
     it("should create valueObject with 'high' energy", () => {
       const valueObject = PetEnergyValueObject.create("high")
 
@@ -27,7 +27,7 @@ describe("PetEnergyValueObject", () => {
 
     it("should throw InvalidResourceSelectionError for invalid energy", () => {
       expect(() =>
-        PetEnergyValueObject.create("extreme" as any)
+        PetEnergyValueObject.create("extreme")
       ).toThrow(InvalidResourceSelectionError)
     })
 

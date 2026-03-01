@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest"
 import { InvalidResourceSelectionError } from "@/domain/error/invalid-resource-selection-error"
+import { describe, expect, it } from "vitest"
 import { PetSizeValueObject } from "./pet-size"
 
 describe("PetSizeValueObject", () => {
@@ -27,7 +27,7 @@ describe("PetSizeValueObject", () => {
 
     it("should throw InvalidResourceSelectionError for invalid size", () => {
       expect(() =>
-        PetSizeValueObject.create("giant" as any)
+        PetSizeValueObject.create("giant")
       ).toThrow(InvalidResourceSelectionError)
     })
 

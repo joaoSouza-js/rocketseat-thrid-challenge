@@ -1,11 +1,11 @@
 import { Pet } from "../entities/pet"
 import { LocationValueObject } from "../value-object/location"
-import { PetDependenceValueObject, PetDependency } from "../value-object/pet-dependence"
-import { PetEnergy, PetEnergyValueObject } from "../value-object/pet-energy"
-import { PetSize, PetSizeValueObject } from "../value-object/pet-size"
+import { PetDependenceValueObject } from "../value-object/pet-dependence"
+import { PetEnergyValueObject } from "../value-object/pet-energy"
+import { PetSizeValueObject } from "../value-object/pet-size"
 
 
-export interface  PetAvailableQuery  {
+export interface PetAvailableQuery {
   page?: number,
   limit?: number
   size?: PetSizeValueObject,
@@ -18,7 +18,7 @@ export interface PetRepository {
 
   findById(id: string): Promise<Pet | null>
 
-  findByLocation(props: {location: LocationValueObject, query?: PetAvailableQuery}): Promise<Pet[]>
+  findByLocation(props: { location: LocationValueObject, query?: PetAvailableQuery }): Promise<Pet[]>
 
   delete(id: string): Promise<void>
 }

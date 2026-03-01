@@ -6,8 +6,7 @@ import { PetResponseMapper } from "@/application/mappers/pet-response-mapper";
 import { PetRepository } from "@/domain/pet/repositories/pet-repository";
 import { LocationValueObject } from "@/domain/pet/value-object/location";
 import {
-    PetDependenceValueObject,
-    PetDependency,
+    PetDependenceValueObject
 } from "@/domain/pet/value-object/pet-dependence";
 import { PetEnergyValueObject } from "@/domain/pet/value-object/pet-energy";
 import { PetSizeValueObject } from "@/domain/pet/value-object/pet-size";
@@ -28,7 +27,7 @@ export class FindPetByLocationUseCase {
     async execute(
         input: FindPetByLocationCommand,
     ): Promise<FindPetByLocationResponse> {
-       
+
         const petDependence = input.query?.dependence
             ? PetDependenceValueObject.create(input.query.dependence)
             : undefined;
@@ -46,7 +45,7 @@ export class FindPetByLocationUseCase {
             city: input.city,
         });
 
-   
+
         const pets = await this.pets.findByLocation({
             location: Location,
             query: {

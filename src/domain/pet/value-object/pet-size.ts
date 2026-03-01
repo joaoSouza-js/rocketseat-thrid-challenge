@@ -1,4 +1,3 @@
-import { InvalidPetSizeError } from "@/domain/error/invalid-pet-size-error";
 import { InvalidResourceSelectionError } from "@/domain/error/invalid-resource-selection-error";
 
 export type PetSize = "small" | "medium" | "large";

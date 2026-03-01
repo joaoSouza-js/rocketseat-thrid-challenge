@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { IdGenerator } from "@/application/ports/id-generator";
-import { CreatePetUseCase } from "./create-pet";
-import { InMemoryPetRepository } from "@/infra/repositories/in-memory/pet-in-memory-repository";
-import { InMemoryOrgRepository } from "@/infra/repositories/in-memory/org-in-memory-repository";
-import { Org } from "@/domain/org/entities/org";
 import { ResourceNotFoundError } from "@/application/error/resource-not-found-error";
+import { IdGenerator } from "@/application/ports/id-generator";
+import { Org } from "@/domain/org/entities/org";
+import { InMemoryOrgRepository } from "@/infra/repositories/in-memory/org-in-memory-repository";
+import { InMemoryPetRepository } from "@/infra/repositories/in-memory/pet-in-memory-repository";
+import { CreatePetUseCase } from "./create-pet";
 
 describe("CreatePetUseCase use case", () => {
     let sut: CreatePetUseCase;
