@@ -1,7 +1,7 @@
 export abstract class AppError extends Error {
-    abstract readonly statusCode : number
-    protected constructor(message:string) {
-        super(message)
-        this.name = this.constructor.name
-    }
+  abstract readonly statusCode: number;
+  protected constructor(message: string) {
+    super(message);
+    this.name = this.constructor.name;
+  }
 }

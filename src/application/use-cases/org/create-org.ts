@@ -5,49 +5,47 @@ import { EmailAlreadyExistError } from "../../error/email-already-exist-error";
 import { IdGenerator } from "../../ports/id-generator";
 
 interface Repositories {
-    orgs: OrgRepository
+  orgs: OrgRepository;
 }
 
 interface Services {
-    idGenerator: IdGenerator
+  idGenerator: IdGenerator;
 }
 
 interface CreateOrgUseCaseDeps {
-    repositories: Repositories,
-    services: Services
+  repositories: Repositories;
+  services: Services;
 }
 
 export class CreateOrgUseCase {
-    private orgs: OrgRepository
-    private idGenerator: IdGenerator
+  private orgs: OrgRepository;
+  private idGenerator: IdGenerator;
 
-    constructor(private readonly deps: CreateOrgUseCaseDeps) {
-        this.orgs = deps.repositories.orgs
-        this.idGenerator = this.deps.services.idGenerator
+  constructor(private readonly deps: CreateOrgUseCaseDeps) {
+    this.orgs = deps.repositories.orgs;
+    this.idGenerator = this.deps.services.idGenerator;
+  }
+
+  async execute(input: CreateOrgCommand): Promise<CreateOrgResponse> {
+    const org = await this.orgs.findByEmail(input.email);
+
+    if (org != null) {
+      throw new EmailAlreadyExistError(input.email);
     }
 
-    async  execute(input: CreateOrgCommand):Promise<CreateOrgResponse> {
-        const org = await this.orgs.findByEmail(input.email)
+    const newOrg = Org.create({
+      id: this.idGenerator.next(),
+      description: input.description,
+      email: input.email,
+      name: input.name,
+      phone: input.phone,
+    });
+    await this.orgs.save(newOrg);
 
-        if(org != null){
-           throw new EmailAlreadyExistError(input.email)
-        }
-
-        const newOrg =  Org.create({
-            id: this.idGenerator.next(),
-            description: input.description,
-            email: input.email,
-            name: input.name,
-            phone: input.phone,
-        })
-        await this.orgs.save(newOrg)
-
-        return {
-            org: {
-                
-                id: newOrg.id
-            }
-        }
-    }
-
+    return {
+      org: {
+        id: newOrg.id,
+      },
+    };
+  }
 }

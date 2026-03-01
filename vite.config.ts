@@ -1,9 +1,9 @@
-import path from 'node:path'
-import { defineConfig } from 'vitest/config'
+import path from "node:path";
+import { defineConfig } from "vitest/config";
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   test: {
@@ -14,15 +14,16 @@ export default defineConfig({
         test: {
           name: "unit",
           dir: "src",
-        }
-      }, {
+        },
+      },
+      {
         extends: true,
         test: {
           name: "e2e",
           dir: "src/http/controller",
-          environment: "./prisma/vitest-environment-prisma/prisma-test-environment"
-        }
-      }
-    ]
-  }
-})
+          environment: "./prisma/vitest-environment-prisma/prisma-test-environment",
+        },
+      },
+    ],
+  },
+});

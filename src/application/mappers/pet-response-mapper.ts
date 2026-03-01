@@ -1,15 +1,15 @@
-import { Pet } from "@/domain/pet/entities/pet"
+import { Pet } from "@/domain/pet/entities/pet";
 
 export interface PetResponseDTO {
-  id: string
-  name: string
-  orgId: string
-  state: string
-  city: string
-  size: string
-  dependence: string
-  energy: string
-  createdAt: Date
+  id: string;
+  name: string;
+  orgId: string;
+  state: string;
+  city: string;
+  size: string;
+  dependence: string;
+  energy: string;
+  createdAt: Date;
 }
 
 export class PetResponseMapper {
@@ -24,6 +24,6 @@ export class PetResponseMapper {
       dependence: pet.dependence,
       energy: pet.energy,
       createdAt: pet.createdAt,
-    }
+    };
   }
 }
