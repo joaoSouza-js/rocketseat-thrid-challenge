@@ -1,4 +1,6 @@
 import { Location } from "../value-object/location"
+import { PetDependenceValueObject, PetDependency } from "../value-object/pet-dependence"
+import { PetEnergy } from "../value-object/pet-energy"
 import { PetSize, PetSizeValueObject } from "../value-object/pet-size"
 
 interface PetProps {
@@ -8,6 +10,8 @@ interface PetProps {
   location: Location
   createdAt: Date
   size: PetSizeValueObject
+  dependence: PetDependenceValueObject,
+  energy: PetDependenceValueObject
 }
 
 interface CreatePetProps {
@@ -17,6 +21,8 @@ interface CreatePetProps {
   state: string
   city: string
   size: PetSize
+  dependence: PetDependency,
+  energy: PetEnergy
 }
 
 export class Pet {
@@ -28,6 +34,8 @@ export class Pet {
     }
 
     const petSize =  PetSizeValueObject.create(input.size)
+    const petDependence = PetDependenceValueObject.create(input.dependence)
+    const petEnergy = PetDependenceValueObject.create(input.energy)
 
     return new Pet({
       id: input.id,
@@ -38,7 +46,9 @@ export class Pet {
         city: input.city,
       }),
       createdAt: new Date(),
-      size: petSize
+      size: petSize,
+      dependence: petDependence,
+      energy: petEnergy
     })
   }
 
@@ -82,5 +92,17 @@ export class Pet {
 
   get createdAt() {
     return this.props.createdAt
+  }
+
+  get size() {
+    return this.props.size.value 
+  }
+
+  get dependence() {
+    return this.props.dependence.value
+  }
+
+  get energy() {
+    return this.props.energy.value
   }
 }

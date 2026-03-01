@@ -42,7 +42,9 @@ export class CreatePet {
             name: input.name,
             orgId: input.orgId,
             size: input.size,
-            state: input.state
+            state: input.state,
+            dependence: input.dependence,
+            energy: input.energy
         })
 
         return {
