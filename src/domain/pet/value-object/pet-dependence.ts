@@ -3,18 +3,27 @@ import { InvalidResourceSelectionError } from "@/domain/error/invalid-resource-s
 export type PetDependency = "low" | "medium" | "high";
 
 export class PetDependenceValueObject {
-    private constructor(private readonly  petDependency: PetDependency) {}
-    
-    private static readonly dependencies: PetDependency[] = ["low", "medium", "high"]
+    private constructor(private readonly petDependency: PetDependency) {}
 
-    static create(PetDependency: PetDependency): PetDependenceValueObject {
-        const isValid = this.dependencies.some((dependence) => dependence === PetDependency)
-        if (isValid === false) throw new InvalidResourceSelectionError(PetDependency, this.dependencies)
-        return new PetDependenceValueObject(PetDependency)
+    private static readonly dependencies: PetDependency[] = [
+        "low",
+        "medium",
+        "high",
+    ];
 
+    private static isValid(value: string): value is PetDependency {
+        return this.dependencies.includes(value as PetDependency);
     }
 
-    get value () {
-        return this.petDependency
+    static create(value: string): PetDependenceValueObject {
+        if (!this.isValid(value)) {
+            throw new InvalidResourceSelectionError(value, this.dependencies);
+        }
+
+        return new PetDependenceValueObject(value);
+    }
+
+    get value() {
+        return this.petDependency;
     }
 }

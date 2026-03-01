@@ -12,16 +12,16 @@ interface Services {
     idGenerator: IdGenerator
 }
 
-interface CreateOrgDeps {
+interface CreateOrgUseCaseDeps {
     repositories: Repositories,
     services: Services
 }
 
-export class CreateOrg {
+export class CreateOrgUseCase {
     private orgs: OrgRepository
     private idGenerator: IdGenerator
 
-    constructor(private readonly deps: CreateOrgDeps) {
+    constructor(private readonly deps: CreateOrgUseCaseDeps) {
         this.orgs = deps.repositories.orgs
         this.idGenerator = this.deps.services.idGenerator
     }

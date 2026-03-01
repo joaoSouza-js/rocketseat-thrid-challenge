@@ -7,10 +7,10 @@ export interface CreatePetCommand {
     orgId: string
     state: string
     city: string,
-    size: PetSize
     description: string,
-    dependence: PetDependency
-    energy: PetEnergy
+    size: string
+    dependence: string
+    energy: string
 }
 
 export interface CreatePetResponse {

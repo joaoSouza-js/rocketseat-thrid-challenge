@@ -1,14 +1,14 @@
 import { describe, it, expect, beforeAll, vi, beforeEach } from "vitest";
 
 import { IdGenerator } from "@/application/ports/id-generator";
-import { CreatePet } from "./create-pet";
+import { CreatePetUseCase } from "./create-pet";
 import { InMemoryPetRepository } from "@/infra/repositories/in-memory/pet-in-memory-repository";
 import { InMemoryOrgRepository } from "@/infra/repositories/in-memory/org-in-memory-repository";
 import { Org } from "@/domain/org/entities/org";
 import { ResourceNotFoundError } from "@/application/error/resource-not-found-error";
 
-describe("CreatePet use case", () => {
-    let sut: CreatePet;
+describe("CreatePetUseCase use case", () => {
+    let sut: CreatePetUseCase;
     let orgs: InMemoryOrgRepository;
     let pets: InMemoryPetRepository;
     let idGenerator: IdGenerator;
@@ -21,7 +21,7 @@ describe("CreatePet use case", () => {
             next: vi.fn(() => "fixed-pet-id"),
         };
 
-        sut = new CreatePet({
+        sut = new CreatePetUseCase({
             repositories: {
                 orgs: orgs,
                 pets: pets,

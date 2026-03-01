@@ -3,10 +3,10 @@ import { OrgRepository } from "@/domain/org/repositories/org-repository";
 import { InMemoryOrgRepository } from "@/infra/repositories/in-memory/org-in-memory-repository";
 import { IdGenerator } from "@/application/ports/id-generator";
 import { randomUUID } from "node:crypto";
-import { CreateOrg } from "./create-org";
+import { CreateOrgUseCase } from "./create-org";
 import { EmailAlreadyExistError } from "@/application/error/email-already-exist-error";
 describe("create org user case", () => {
-    let sut: CreateOrg;
+    let sut: CreateOrgUseCase;
     let orgs: OrgRepository;
     let idGenerator: IdGenerator;
     beforeEach(() => {
@@ -14,7 +14,7 @@ describe("create org user case", () => {
         idGenerator = {
             next: vi.fn(() => randomUUID()),
         };
-        sut = new CreateOrg({
+        sut = new CreateOrgUseCase({
             repositories: { orgs },
             services: { idGenerator },
         });

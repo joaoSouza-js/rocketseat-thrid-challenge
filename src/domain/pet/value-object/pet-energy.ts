@@ -7,9 +7,14 @@ export class PetEnergyValueObject {
 
     private static readonly energies: PetEnergy[] = ["low", "medium", "high"]
 
-    static create(petEnergy: PetEnergy): PetEnergyValueObject {
-        const isValid = this.energies.some((energy) => energy === petEnergy)
-        if (isValid === false) throw new InvalidResourceSelectionError(petEnergy, this.energies)
+    private static  isValid(value:string):value is PetEnergy{
+        return  this.energies.includes(value as PetEnergy)
+    }
+
+    static create(petEnergy: string ): PetEnergyValueObject {
+        if(this.isValid(petEnergy) === false){
+            throw new InvalidResourceSelectionError(petEnergy, this.energies)
+        }
         return new PetEnergyValueObject(petEnergy)
     }
 

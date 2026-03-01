@@ -27,7 +27,7 @@ describe("PetDependenceValueObject", () => {
 
     it("should throw InvalidResourceSelectionError when dependency is invalid", () => {
       expect(() =>
-        PetDependenceValueObject.create("extreme" as any)
+        PetDependenceValueObject.create("extreme")
       ).toThrow(InvalidResourceSelectionError)
     })
 

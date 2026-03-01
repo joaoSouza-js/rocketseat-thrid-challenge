@@ -20,9 +20,9 @@ interface CreatePetProps {
   orgId: string
   state: string
   city: string
-  size: PetSize
-  dependence: PetDependency,
-  energy: PetEnergy
+  size: string
+  dependence: string,
+  energy: string
 }
 
 export class Pet {

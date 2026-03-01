@@ -15,17 +15,17 @@ interface Services {
     idGenerator: IdGenerator
 }
 
-interface CreatePetDeps {
+interface CreatePetUseCaseDeps {
     repositories: Repositories
     services: Services
 }
 
 
-export class CreatePet {
+export class CreatePetUseCase {
     orgs: OrgRepository
     pets: PetRepository
     idGenerator: IdGenerator
-    constructor(private readonly deps: CreatePetDeps) {
+    constructor(private readonly deps: CreatePetUseCaseDeps) {
         this.orgs = deps.repositories.orgs
         this.pets = deps.repositories.pets
         this.idGenerator = this.deps.services.idGenerator
@@ -41,8 +41,8 @@ export class CreatePet {
             id: this.idGenerator.next(),
             name: input.name,
             orgId: input.orgId,
-            size: input.size,
             state: input.state,
+            size: input.size,
             dependence: input.dependence,
             energy: input.energy
         })
