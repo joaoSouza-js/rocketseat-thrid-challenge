@@ -3,5 +3,6 @@ build
 dist
 .env
 coverage
+generated
 postgres.env
 /generated/prisma

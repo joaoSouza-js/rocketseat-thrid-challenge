@@ -28,26 +28,26 @@
       - [x] TokenService
     - [x] Application Errors
 
-  - [ ] Infra
+  - [x] Infra
     - [x] In-memory repositories
       - [x] Pet
       - [x] Org
 
-    - [ ] Prisma
-      - [ ] Schema
-        - [ ] Pet model
-        - [ ] Org model
+    - [x] Prisma
+      - [x] Schema
+        - [x] Pet model
+        - [x] Org model
         - [ ] RefreshToken model (if persistent strategy)
-      - [ ] Prisma repositories
-        - [ ] PrismaPetRepository
-        - [ ] PrismaOrgRepository
-      - [ ] Database connection
-      - [ ] Run migrations
+      - [x] Prisma repositories
+        - [x] PrismaPetRepository
+        - [x] PrismaOrgRepository
+      - [x] Database connection
+      - [x] Run migrations
 
-    - [ ] Database
-      - [ ] PostgreSQL (Docker)
-      - [ ] docker-compose.yml
-      - [ ] Env configuration
+    - [x] Database
+      - [x] PostgreSQL (Docker)
+      - [x] docker-compose.yml
+      - [x] Env configuration
 
   - [ ] HTTP
     - [ ] Fastify Setup
