@@ -12,6 +12,7 @@ export class PrismaOrgRepository implements OrgRepository {
         const orgFormatted = Org.rehydrate({
             createdAt: org.createdAt,
             description: org.description,
+            passwordHash: org.password,
             email: orgEmail,
             id: org.id,
             name: org.name,
@@ -22,6 +23,7 @@ export class PrismaOrgRepository implements OrgRepository {
     async save(input: Org): Promise<void> {
         await prisma.org.create({
             data: {
+                password: input.passwordHash,
                 id: input.id,
                 description: input.description,
                 email: input.email.toString(),

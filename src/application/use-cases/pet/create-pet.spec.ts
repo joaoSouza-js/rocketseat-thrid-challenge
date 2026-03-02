@@ -36,6 +36,7 @@ describe("CreatePetUseCase use case", () => {
     const org = Org.create({
       id: "org-1",
       name: "Org",
+      passwordHash: "passwordHash",
       email: "org@mail.com",
       phone: "123",
       description: "desc",

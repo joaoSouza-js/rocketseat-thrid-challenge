@@ -45,7 +45,7 @@ describe("get pet use case", () => {
         const petId = "pet-id"
 
 
-        expect(sut.execute({ id: petId })).rejects.toBeInstanceOf(ResourceNotFoundError)
+        await expect(sut.execute({ id: petId })).rejects.toBeInstanceOf(ResourceNotFoundError)
 
     })
 })

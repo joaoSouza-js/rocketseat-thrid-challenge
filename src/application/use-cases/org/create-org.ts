@@ -1,3 +1,4 @@
+import { HashGenerator } from "@/application/ports/hash-generator";
 import { Org } from "../../../domain/org/entities/org";
 import { OrgRepository } from "../../../domain/org/repositories/org-repository";
 import { CreateOrgCommand, CreateOrgResponse } from "../../dto/org/create-org-command";
@@ -10,6 +11,7 @@ interface Repositories {
 
 interface Services {
   idGenerator: IdGenerator;
+  hashGenerator: HashGenerator
 }
 
 interface CreateOrgUseCaseDeps {
@@ -20,10 +22,12 @@ interface CreateOrgUseCaseDeps {
 export class CreateOrgUseCase {
   private orgs: OrgRepository;
   private idGenerator: IdGenerator;
+  private hashGenerator: HashGenerator
 
   constructor(private readonly deps: CreateOrgUseCaseDeps) {
     this.orgs = deps.repositories.orgs;
     this.idGenerator = this.deps.services.idGenerator;
+    this.hashGenerator = this.deps.services.hashGenerator
   }
 
   async execute(input: CreateOrgCommand): Promise<CreateOrgResponse> {
@@ -33,9 +37,12 @@ export class CreateOrgUseCase {
       throw new EmailAlreadyExistError(input.email);
     }
 
+    const passwordHash = await this.hashGenerator.hash(input.password)
+
     const newOrg = Org.create({
       id: this.idGenerator.next(),
       description: input.description,
+      passwordHash: passwordHash,
       email: input.email,
       name: input.name,
       phone: input.phone,
