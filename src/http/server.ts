@@ -27,6 +27,9 @@ app.register(jwt, {
         cookieName: "refresh_token",
         signed: false,
     },
+    sign: {
+        expiresIn: "7d"
+    }
 })
 
 app.register(appRoutes, {

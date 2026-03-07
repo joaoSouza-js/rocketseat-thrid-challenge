@@ -50,53 +50,54 @@
       - [x] Env configuration
 
   - [ ] HTTP
-    - [ ] Fastify Setup
-      - [ ] App instance
-      - [ ] Register plugins
-        - [ ] @fastify/cookie
-        - [ ] @fastify/jwt
-        - [ ] @fastify/cors
+    - [x] Fastify Setup
+      - [x] App instance
+      - [x] Register plugins
+        - [x] @fastify/cookie
+        - [x] @fastify/jwt
+        - [x] @fastify/cors
       - [ ] Zod validation
       - [ ] Global error handler
       - [ ] Graceful shutdown
 
-    - [ ] Authentication Strategy
-      - [ ] Access Token
-        - [ ] Short expiration (e.g., 15m)
-        - [ ] Signed with ACCESS_SECRET
-        - [ ] Sent in Authorization header
+    - [x] Authentication Strategy
+      - [x] Access Token
+        - [x] expiration (e.g., 7d)
+        - [x] Signed with ACCESS_SECRET
+        - [x] Sent in Authorization header
 
-      - [ ] Refresh Token
-        - [ ] Long expiration (e.g., 7d)
-        - [ ] Signed with REFRESH_SECRET
-        - [ ] Stored in httpOnly cookie
-        - [ ] Token rotation strategy
+      - [x] Refresh Token
+        - [x] Long expiration (e.g., 30d)
+        - [x] Signed with REFRESH_SECRET
+        - [x] Stored in httpOnly cookie
+        - [x] Token rotation strategy
         - [ ] Revoke strategy (if persistent)
 
-    - [ ] Controllers
-      - [ ] CreateOrgController
-      - [ ] AuthenticateOrgController
-      - [ ] RefreshTokenController
-      - [ ] CreatePetController
-      - [ ] GetPetController
+    - [x] Controllers
+      - [x] CreateOrgController
+      - [x] AuthenticateOrgController
+      - [x] RefreshTokenController
+      - [x] CreatePetController
+      - [x] GetPetController
+      - [x] FindPetByLocationController
 
     - [ ] Factories (inside HTTP layer)
-      - [ ] makeCreateOrgController
-      - [ ] makeAuthenticateController
+      - [x] makeCreateOrgController
+      - [x] makeAuthenticateController
       - [ ] makeRefreshTokenController
-      - [ ] Inject Prisma repositories
-      - [ ] Inject JWT service
+      - [x] Inject Prisma repositories
+      - [x] Inject JWT service
 
-    - [ ] Middlewares
-      - [ ] verifyJWT (access token)
-      - [ ] verifyRefreshToken
-      - [ ] Auth guard for protected routes
+    - [x] Middlewares
+      - [x] verifyJWT (access token)
+      - [x] verifyRefreshToken
+      - [x] Auth guard for protected routes
 
-    - [ ] Cookie Configuration
-      - [ ] httpOnly
+    - [x] Cookie Configuration
+      - [x] httpOnly
       - [ ] secure (prod only)
-      - [ ] sameSite strategy
-      - [ ] path configuration
+      - [x] sameSite strategy
+      - [x] path configuration
 
   - [ ] E2E Tests
     - [ ] Auth flow

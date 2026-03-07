@@ -1,8 +1,8 @@
 import { OrgRepository } from "@/domain/org/repositories/org-repository";
+import { Pet } from "@/domain/pet/entities/pet";
 import { PetRepository } from "@/domain/pet/repositories/pet-repository";
 import { CreatePetCommand, CreatePetResponse } from "../../dto/pet/create-pet-command";
 import { ResourceNotFoundError } from "../../error/resource-not-found-error";
-import { Pet } from "@/domain/pet/entities/pet";
 import { IdGenerator } from "../../ports/id-generator";
 
 interface Repositories {
@@ -20,9 +20,10 @@ interface CreatePetUseCaseDeps {
 }
 
 export class CreatePetUseCase {
-  orgs: OrgRepository;
-  pets: PetRepository;
-  idGenerator: IdGenerator;
+  private orgs: OrgRepository;
+  private pets: PetRepository;
+  private idGenerator: IdGenerator;
+
   constructor(private readonly deps: CreatePetUseCaseDeps) {
     this.orgs = deps.repositories.orgs;
     this.pets = deps.repositories.pets;
@@ -44,6 +45,8 @@ export class CreatePetUseCase {
       dependence: input.dependence,
       energy: input.energy,
     });
+
+    await this.pets.create(newPet)
 
     return {
       pet: {
