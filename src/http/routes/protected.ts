@@ -8,6 +8,6 @@ import { roleVerifyMiddleware } from "../middleware/role-verify-middleware";
 export async function protectRoutes(app: FastifyInstance) {
     app.addHook("onRequest", jwtMiddleware)
     app.post("/pet", { onRequest: roleVerifyMiddleware(["ORG"]) }, createPetController)
-    app.get("/pet:id", getPetController)
+    app.get("/pet/:id", getPetController)
     app.get("/pet", findPetByLocationController)
 }

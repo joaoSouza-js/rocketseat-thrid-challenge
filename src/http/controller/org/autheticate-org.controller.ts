@@ -29,7 +29,7 @@ export async function authenticateOrgController(request: FastifyRequest, reply: 
         path: "/",
         httpOnly: true,
     })
-    reply.send(200).send({
+    reply.status(200).send({
         token: token,
         org: response.org
     })

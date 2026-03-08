@@ -13,7 +13,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: "unit",
-          dir: "src",
+          include: ["application/use-cases/**/*.spec.ts", "domain/**/*.spec.ts", "infra/**/*.spec.ts"],
         },
       },
       {
@@ -21,7 +21,6 @@ export default defineConfig({
         test: {
           name: "e2e",
           dir: "src/http/controller",
-          environment: "./prisma/vitest-environment-prisma/prisma-test-environment",
         },
       },
     ],

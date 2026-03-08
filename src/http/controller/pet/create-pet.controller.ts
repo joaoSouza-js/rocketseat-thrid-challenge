@@ -3,13 +3,12 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
 export const createPetSchema = z.object({
-    orgId: z.string(),
     name: z.string(),
     state: z.string(),
     city: z.string(),
     description: z.string(),
     size: z.enum(["small", "medium", "large"]),
-    dependence: z.enum(["small", "medium", "large"]),
+    dependence: z.enum(["low", "medium", "high"]),
     energy: z.enum(["low", "medium", "high"]),
 })
 
@@ -22,7 +21,7 @@ export async function createPetController(request: FastifyRequest, reply: Fastif
         description: body.description,
         energy: body.energy,
         name: body.name,
-        orgId: body.orgId,
+        orgId: request.user.sub,
         size: body.size,
         state: body.state
     })

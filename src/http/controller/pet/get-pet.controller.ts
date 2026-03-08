@@ -9,7 +9,6 @@ const getPetPathParamsSchema = z.object({
 export async function getPetController(request: FastifyRequest, reply: FastifyReply) {
     const { id } = getPetPathParamsSchema.parse(request.params)
     const getPetUseCase = makeGetPetUseCase()
-
     const response = await getPetUseCase.execute({
         id: id
     })
