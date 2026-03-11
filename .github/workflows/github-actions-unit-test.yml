@@ -16,7 +16,7 @@ jobs:
           node-version: 20
 
       - name: Install deps
-        run: test:unit
+        run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm run test:unit
