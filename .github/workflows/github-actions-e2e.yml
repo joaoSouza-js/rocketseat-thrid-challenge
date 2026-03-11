@@ -1,0 +1,41 @@
+name: e2e test
+
+on: [push]
+
+jobs:
+  run-e2e-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: bitnami/postgresql:latest
+        ports:
+          - "5432:5432"
+        volumes:
+          - /path/to/postgresql-persistence:/bitnami/postgresql
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: generate prisma client
+        run: npm run prisma:generate
+
+      - name: Run tests
+        run: npm run test:e2e
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+          JWT_SECRET: secret
