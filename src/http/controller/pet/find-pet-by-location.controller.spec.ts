@@ -21,8 +21,8 @@ describe("get pet controller e2e", () => {
     });
 
     it.only("should be able to get a pet by location", async () => {
-        const petState = "selectedState";
-        const petCity = "selectedCity";
+        const petState = "findpetState";
+        const petCity = "findpetCity";
         const pet = {
             city: petCity,
             state: petState,
@@ -41,6 +41,7 @@ describe("get pet controller e2e", () => {
             .get(`/api/pet?state=${petState}&city=${petCity}`)
             .set("Authorization", `Bearer ${session.token}`);
 
+        console.log(response.body);
         expect(response.statusCode).toBe(200);
         expect(response.body.total).toBe(1);
         expect(response.body.pets).toHaveLength(1);
