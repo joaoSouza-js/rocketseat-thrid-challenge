@@ -41,7 +41,6 @@ describe("get pet controller e2e", () => {
       .get(`/api/pet?state=${petState}&city=${petCity}`)
       .set("Authorization", `Bearer ${session.token}`);
 
-    console.log(response.body);
     expect(response.statusCode).toBe(200);
     expect(response.body.total).toBe(1);
     expect(response.body.pets).toHaveLength(1);

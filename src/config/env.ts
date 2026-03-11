@@ -1,12 +1,16 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import { z } from "zod";
-
+dotenv.config({
+  override: true
+})
 const envSchema = z.object({
-  NODE_ENV: z.enum(["dev", "test", "production"]).default("dev"),
+  NODE_ENV: z.enum(["dev", "test", "production"]).default("test"),
   DATABASE_URL: z.string(),
   JWT_SECRET: z.string(),
   PORT: z.coerce.number().default(3333),
 });
+
+console.log("process.env", process.env.NODE_ENV);
 
 const _env = envSchema.safeParse(process.env);
 

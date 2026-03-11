@@ -8,6 +8,7 @@
     "test:e2e": "vitest run --project e2e",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prisma:generate": "prisma generate",
     "lint:fix": "eslint --fix src/**/*.ts"
   },
   "keywords": [],

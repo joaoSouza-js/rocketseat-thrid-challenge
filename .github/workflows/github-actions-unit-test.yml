@@ -1,6 +1,6 @@
-name: PR Checks
+name: unit test
 
-on: [pull_request]
+on: [push]
 
 jobs:
   test:
@@ -14,9 +14,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install deps
-        run: test:unit
+        run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm run test:unit
