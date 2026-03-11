@@ -4,7 +4,7 @@ dotenv.config({
   override: true
 })
 const envSchema = z.object({
-  NODE_ENV: z.enum(["dev", "test", "production"]).default("dev"),
+  NODE_ENV: z.enum(["dev", "test", "production"]).default("test"),
   DATABASE_URL: z.string(),
   JWT_SECRET: z.string(),
   PORT: z.coerce.number().default(3333),
