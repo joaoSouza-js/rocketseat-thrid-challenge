@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:unit": "vitest  run --project unit",
+    "test:unit": "vitest  run --project unit", 
     "test:e2e": "vitest run --project e2e",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
