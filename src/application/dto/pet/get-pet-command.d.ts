@@ -1,9 +1,9 @@
 import { PetResponseDTO } from "@/application/mappers/pet-response-mapper";
 
 interface GetPetCommand {
-    id: string;
+  id: string;
 }
 
 interface GetPetCommandResponse {
-    pet: PetResponseDTO
+  pet: PetResponseDTO;
 }

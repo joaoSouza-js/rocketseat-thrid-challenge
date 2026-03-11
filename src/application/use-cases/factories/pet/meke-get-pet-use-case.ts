@@ -2,12 +2,12 @@ import { PrismaPetRepository } from "@/infra/repositories/prisma/prisma-pet-repo
 import { GetPetUseCase } from "../../pet/get-pet";
 
 export function makeGetPetUseCase() {
-    const petsRepository = new PrismaPetRepository();
-    const getPetUseCase = new GetPetUseCase({
-        repositories: {
-            pets: petsRepository,
-        },
-    });
+  const petsRepository = new PrismaPetRepository();
+  const getPetUseCase = new GetPetUseCase({
+    repositories: {
+      pets: petsRepository,
+    },
+  });
 
-    return getPetUseCase
+  return getPetUseCase;
 }

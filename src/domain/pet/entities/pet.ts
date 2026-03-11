@@ -26,7 +26,7 @@ interface CreatePetProps {
 }
 
 export class Pet {
-  private constructor(private props: PetProps) { }
+  private constructor(private props: PetProps) {}
 
   static create(input: CreatePetProps): Pet {
     if (!input.name.trim()) {

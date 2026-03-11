@@ -11,7 +11,7 @@ interface Repositories {
 
 interface Services {
   idGenerator: IdGenerator;
-  hashGenerator: HashGenerator
+  hashGenerator: HashGenerator;
 }
 
 interface CreateOrgUseCaseDeps {
@@ -22,12 +22,12 @@ interface CreateOrgUseCaseDeps {
 export class CreateOrgUseCase {
   private orgs: OrgRepository;
   private idGenerator: IdGenerator;
-  private hashGenerator: HashGenerator
+  private hashGenerator: HashGenerator;
 
   constructor(private readonly deps: CreateOrgUseCaseDeps) {
     this.orgs = deps.repositories.orgs;
     this.idGenerator = this.deps.services.idGenerator;
-    this.hashGenerator = this.deps.services.hashGenerator
+    this.hashGenerator = this.deps.services.hashGenerator;
   }
 
   async execute(input: CreateOrgCommand): Promise<CreateOrgResponse> {
@@ -37,7 +37,7 @@ export class CreateOrgUseCase {
       throw new EmailAlreadyExistError(input.email);
     }
 
-    const passwordHash = await this.hashGenerator.hash(input.password)
+    const passwordHash = await this.hashGenerator.hash(input.password);
 
     const newOrg = Org.create({
       id: this.idGenerator.next(),

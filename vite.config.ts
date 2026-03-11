@@ -13,7 +13,11 @@ export default defineConfig({
         extends: true,
         test: {
           name: "unit",
-          include: ["application/use-cases/**/*.spec.ts", "domain/**/*.spec.ts", "infra/**/*.spec.ts"],
+          include: [
+            "application/use-cases/**/*.spec.ts",
+            "domain/**/*.spec.ts",
+            "infra/**/*.spec.ts",
+          ],
         },
       },
       {

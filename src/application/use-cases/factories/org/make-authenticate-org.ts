@@ -3,17 +3,17 @@ import { PrismaOrgRepository } from "@/infra/repositories/prisma/prisma-org-repo
 import { AuthenticateOrgUseCase } from "../../org/authenticate-org";
 
 export function makeAuthenticateOrgUseCase() {
-    const orgRepository = new PrismaOrgRepository()
-    const hashGenerator = new BcryptHashGenerator()
+  const orgRepository = new PrismaOrgRepository();
+  const hashGenerator = new BcryptHashGenerator();
 
-    const useCase = new AuthenticateOrgUseCase({
-        repositories: {
-            orgs: orgRepository
-        },
-        services: {
-            hashGenerator: hashGenerator
-        }
-    })
+  const useCase = new AuthenticateOrgUseCase({
+    repositories: {
+      orgs: orgRepository,
+    },
+    services: {
+      hashGenerator: hashGenerator,
+    },
+  });
 
-    return useCase
+  return useCase;
 }

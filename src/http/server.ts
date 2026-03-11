@@ -1,11 +1,11 @@
-import { env } from "@/config/env"
-import { app } from "./app"
+import { env } from "@/config/env";
+import { app } from "./app";
 
-app.listen({
+app
+  .listen({
     port: env.PORT,
     host: "0.0.0.0",
-}).then(() => {
-    console.log("HTTP server running on http://localhost:3333")
-
-}
-)
+  })
+  .then(() => {
+    console.log("HTTP server running on http://localhost:3333");
+  });

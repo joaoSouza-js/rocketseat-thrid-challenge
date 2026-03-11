@@ -2,12 +2,12 @@ import { PrismaPetRepository } from "@/infra/repositories/prisma/prisma-pet-repo
 import { FindPetByLocationUseCase } from "../../pet/find-pet-by-location";
 
 export function makeFindPetByLocation() {
-    const petsRepository = new PrismaPetRepository();
-    const findPetByLocationUseCase = new FindPetByLocationUseCase({
-        repositories: {
-            pets: petsRepository
-        }
-    })
+  const petsRepository = new PrismaPetRepository();
+  const findPetByLocationUseCase = new FindPetByLocationUseCase({
+    repositories: {
+      pets: petsRepository,
+    },
+  });
 
-    return findPetByLocationUseCase
+  return findPetByLocationUseCase;
 }

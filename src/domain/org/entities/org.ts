@@ -5,7 +5,7 @@ interface OrgProps {
   name: string;
   email: Email;
   phone: string;
-  passwordHash: string,
+  passwordHash: string;
   description: string;
   createdAt: Date;
 }
@@ -14,13 +14,13 @@ interface CrateOrgProps {
   id: string;
   name: string;
   email: string;
-  passwordHash: string
+  passwordHash: string;
   phone: string;
   description: string;
 }
 
 export class Org {
-  private constructor(private props: OrgProps) { }
+  private constructor(private props: OrgProps) {}
 
   static create(input: CrateOrgProps): Org {
     return new Org({
@@ -53,6 +53,6 @@ export class Org {
     return this.props.createdAt;
   }
   get passwordHash() {
-    return this.props.passwordHash
+    return this.props.passwordHash;
   }
 }

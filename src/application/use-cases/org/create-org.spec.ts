@@ -10,7 +10,7 @@ describe("create org user case", () => {
   let sut: CreateOrgUseCase;
   let orgs: OrgRepository;
   let idGenerator: IdGenerator;
-  let hashGenerator: HashGenerator
+  let hashGenerator: HashGenerator;
   beforeEach(() => {
     orgs = new InMemoryOrgRepository();
     idGenerator = {
@@ -19,7 +19,7 @@ describe("create org user case", () => {
     hashGenerator = {
       compare: vi.fn(() => Promise.resolve(false)),
       hash: vi.fn(() => Promise.resolve("hash")),
-    }
+    };
     sut = new CreateOrgUseCase({
       repositories: { orgs },
       services: { idGenerator, hashGenerator },

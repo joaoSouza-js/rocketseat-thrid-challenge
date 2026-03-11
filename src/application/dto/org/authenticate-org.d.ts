@@ -1,10 +1,10 @@
-import { OrgResponseDto } from "@/application/mappers/org-response-mapper"
+import { OrgResponseDto } from "@/application/mappers/org-response-mapper";
 
 export interface AuthenticateOrgCommand {
-    email: string,
-    password: string
+  email: string;
+  password: string;
 }
 
 export interface AuthenticateOrgResponse {
-    org: OrgResponseDto
+  org: OrgResponseDto;
 }

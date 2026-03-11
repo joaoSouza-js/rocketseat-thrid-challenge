@@ -4,18 +4,18 @@ import { PrismaPetRepository } from "@/infra/repositories/prisma/prisma-pet-repo
 import { CreatePetUseCase } from "../../pet/create-pet";
 
 export function makeCreatePetUseCase() {
-    const petsRepository = new PrismaPetRepository();
-    const orgsRepository = new PrismaOrgRepository()
-    const idGenerator = new NodeIdGenerator()
-    const createPetUseCase = new CreatePetUseCase({
-        repositories: {
-            orgs: orgsRepository,
-            pets: petsRepository,
-        },
-        services: {
-            idGenerator: idGenerator
-        }
-    })
+  const petsRepository = new PrismaPetRepository();
+  const orgsRepository = new PrismaOrgRepository();
+  const idGenerator = new NodeIdGenerator();
+  const createPetUseCase = new CreatePetUseCase({
+    repositories: {
+      orgs: orgsRepository,
+      pets: petsRepository,
+    },
+    services: {
+      idGenerator: idGenerator,
+    },
+  });
 
-    return createPetUseCase
+  return createPetUseCase;
 }

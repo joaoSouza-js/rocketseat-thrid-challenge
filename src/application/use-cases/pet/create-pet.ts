@@ -46,7 +46,7 @@ export class CreatePetUseCase {
       energy: input.energy,
     });
 
-    await this.pets.create(newPet)
+    await this.pets.create(newPet);
 
     return {
       pet: {
